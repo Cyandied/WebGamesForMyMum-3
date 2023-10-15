@@ -1,0 +1,48 @@
+
+.gamearea {
+    height: 5000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.gamearea > div {
+    width: 5000px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.gamecontrol {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    height: 100px;
+    width: 30%;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 20px;
+    background-color: rgb(27, 26, 29);
+}
+
+.gamecontrol > h1 {
+    margin: 0;
+}
+
+.tile {
+    background-color: rgb(76, 66, 97);
+    width: 80px;
+    height: 80px;
+    border-style: solid;
+    border-color: rgb(95, 81, 123);
+    border-width: 2px;
+}
+
+.red {
+    background-color: brown;
+}
+
+@media (max-width: 500px) {
+
+  }
