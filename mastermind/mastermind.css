@@ -1,0 +1,178 @@
+.playarea {
+    display: flex;
+    flex-direction: row;
+    padding: 30px;
+    justify-content: space-between;
+}
+
+.playarea-container {
+    width: 85%;
+    background-color: rgb(45, 44, 48);
+    min-height: 50vh;
+    margin: 0 auto;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.colors {
+    width: 85%;
+    background-color: rgb(45, 44, 48);
+    margin: 20px auto;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    justify-content: space-between;
+}
+
+.input {
+    height: 70px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.pick, .input-dot {
+    border-style: none !important; 
+    padding: 5px !important;
+    height: 60px !important;
+    width: 60px !important;
+    border-radius: 33px !important;
+}
+
+@media (max-width: 500px) {
+    .input {
+        height: 30px;
+    }
+    .pick, .input-dot {
+        height: 25px !important;
+        width: 25px !important;
+        border-radius: 15px !important;
+    }
+  }
+
+.pick:hover, .input-dot:hover {
+    border-style: solid !important;
+    border-width: 2px !important;
+    border-color: black !important;
+}
+
+.red {
+    background-color: red;
+}
+
+.green {
+    background-color: green;
+}
+
+.blue {
+    background-color: lightskyblue;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.hotpink {
+    background-color: hotpink;
+}
+
+.white {
+    background-color: white;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.purple {
+    background-color:purple;
+}
+
+.display-colors {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.display-colors > div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 10px;
+    padding: 10px;
+}
+
+.display-eval {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.display-eval > div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px;
+    height: 30px;
+}
+
+.display-eval > div > div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 5px;
+    gap: 5px;
+}
+
+.eval-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+}
+
+.results {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.726);
+    text-align: center;
+}
+
+.results > h1 {
+    margin-top: 50vh;
+}
+
+.info {
+    font-size: 20px;
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+
+.again {
+    margin-top: 55vh;
+}
+
+button {
+    padding: 8px 10px;
+    font-size: 30px;
+    color: black;
+}

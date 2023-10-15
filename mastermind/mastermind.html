@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastermind</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="mastermind.css">
+</head>
+
+<body>
+    <div class="playarea-container">
+        <div class="playarea">
+            <div class="display-colors"></div>
+            <div class="display-eval"></div>
+        </div>
+    </div>
+    <div class="colors">
+        <div class="info">Gæt : <span id="passed">0</span>/12</div>
+        <div class="input"></div>
+        <div class="buttons">
+            <button class="pick red" data-color="red"></button>
+            <button class="pick green" data-color="green"></button>
+            <button class="pick blue" data-color="blue"></button>
+            <button class="pick yellow" data-color="yellow"></button>
+            <button class="pick hotpink" data-color="hotpink"></button>
+            <button class="pick white" data-color="white"></button>
+            <button class="pick orange" data-color="orange"></button>
+            <button class="pick purple" data-color="purple"></button>
+        </div>
+        <button class="guess">send gæt</button>
+    </div>
+    <div class="results hidden"></div>
+    <script defer src="mastermind.js"></script>
+</body>
+
+</html>
