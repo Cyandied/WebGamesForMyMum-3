@@ -146,7 +146,7 @@ function check_poins(tile_type, tile_attrib,adjacent_types){
     
     points += touching_tiles*10
     if(points > 30){
-        show_popup(`${points}!`)
+        show_popup(`${points} point!`)
     }
     return points
 }
