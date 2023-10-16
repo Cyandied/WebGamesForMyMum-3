@@ -1,0 +1,110 @@
+:root {
+    --one : #335c67;
+    --two : #99a88c;
+    --three : #fff3b0;
+    --four : #e09f3e;
+    --five : #9e2a2b;
+    --six : #540b0e;
+}
+
+
+.top-one {
+    border-top-color:var(--one);
+}
+
+.bottom-one {
+    border-bottom-color:var(--one);
+}
+
+.right-one {
+    border-right-color:var(--one);
+}
+
+.left-one {
+    border-left-color:var(--one);
+}
+
+
+.top-two {
+    border-top-color:var(--two);
+}
+
+.bottom-two {
+    border-bottom-color:var(--two);
+}
+
+.right-two {
+    border-right-color:var(--two);
+}
+
+.left-two {
+    border-left-color:var(--two);
+}
+
+
+.top-three {
+    border-top-color:var(--three);
+}
+
+.bottom-three {
+    border-bottom-color:var(--three);
+}
+
+.right-three {
+    border-right-color:var(--three);
+}
+
+.left-three {
+    border-left-color:var(--three);
+}
+
+
+.top-four {
+    border-top-color:var(--four);
+}
+
+.bottom-four {
+    border-bottom-color:var(--four);
+}
+
+.right-four {
+    border-right-color:var(--four);
+}
+
+.left-four {
+    border-left-color:var(--four);
+}
+
+
+.top-five {
+    border-top-color:var(--five);
+}
+
+.bottom-five {
+    border-bottom-color:var(--five);
+}
+
+.right-five {
+    border-right-color:var(--five);
+}
+
+.left-five {
+    border-left-color:var(--five);
+}
+
+
+.top-six {
+    border-top-color:var(--six);
+}
+
+.bottom-six {
+    border-bottom-color:var(--six);
+}
+
+.right-six {
+    border-right-color:var(--six);
+}
+
+.left-six {
+    border-left-color:var(--six);
+}

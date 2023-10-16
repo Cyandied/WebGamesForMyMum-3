@@ -1,21 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brikspil</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="tilegame.css">
-    <link rel="stylesheet" href="tile.css">
+    <link rel="stylesheet" id="tile-style-sheet" href="tile_styles/default.css">
 </head>
+
 <body>
-    <div class="game-over hidden"><h1>GAME OVER!</h1></div>
-    <div class = "gamecontrol">
-        <h1>Placer brik:</h1>
-        <div id="tile-container"></div>
+    <div class="game-over hidden">
+        <h1>GAME OVER!</h1>
+    </div>
+    <div class="gamecontrol">
+        <div>
+            <h1>Placer brik:</h1>
+            <div id="tile-container"></div>
+        </div>
+        <h2>Smidt væk: <span id="counter">0</span>/<span id="counter_max">3</span></h2>
+        <h1>Point: <span id="point">0</span></h1>
+    </div>
+    <div class="popup">
+    </div>
+    <div class = "game-buttons">
+        <div class="game-button" data-action="rotate">
+            ↻
+        </div>
+        <div class="game-button" data-action="discard">
+            〤
+        </div>
+        <select class="game-selector" id="color-select">
+            <option value="default" selected>🖌️</option>
+            <option value="rainbow">🌈</option>
+            <option value="cold">🌨️</option>
+            <option value="dark">🌌</option>
+            <option value="vampire">🧛🏻</option>
+        </select>
     </div>
     <div class="gamearea">
     </div>
     <script defer src="tilegame.js"></script>
 </body>
+
 </html>
