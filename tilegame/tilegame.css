@@ -32,15 +32,28 @@
 
 .tile {
     background-color: rgb(76, 66, 97);
-    width: 80px;
-    height: 80px;
+    /* width: 80px;
+    height: 80px; */
+    width: 0px;
+    height: 0px;
     border-style: solid;
     border-color: rgb(95, 81, 123);
-    border-width: 2px;
+    border-width: 45px;
 }
 
-.red {
-    background-color: brown;
+.game-over {
+    position: fixed;
+    z-index: 200;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.726);
+    text-align: center;
+}
+
+.game-over > h1 {
+    margin-top: 50vh;
 }
 
 @media (max-width: 500px) {
