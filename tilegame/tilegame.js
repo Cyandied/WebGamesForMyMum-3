@@ -30,7 +30,6 @@ function sleep(ms) {
   }
 
 function show_popup(title){
-    console.log("show popup please")
     const title_part = document.createElement("h2")
     title_part.innerHTML = title
     popup.appendChild(title_part)
@@ -75,7 +74,6 @@ var discard_combo = 0
 function action_discard_tile(){
     discard_combo++;
     if(discard_combo > 3){
-        console.log("game over")
         game_over_screen.classList.remove("hidden")
         return
     }
@@ -155,7 +153,7 @@ function check_poins(tile_type, tile_attrib,adjacent_types){
 
 function check_if_can_place(target_type, target_pos) {
     if (JSON.stringify(target_type) != JSON.stringify(naked_data)) {
-        console.log("not allow")
+        show_popup("Du må kun placerer brikker i tomme felter!")
         return false
     }
     const tile = tile_to_place.children[0]
