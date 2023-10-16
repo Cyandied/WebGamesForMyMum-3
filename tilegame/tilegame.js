@@ -16,9 +16,9 @@ const naked_data = {
 
 const colors = ["one","two","three","four","five","six"]
 
-var round = 0
-var points = 0
-var tiles_placed = 0
+let round = 0
+let points = 0
+let tiles_placed = 0
 
 color_select.addEventListener("change",e=>{
     const tile_style = color_select.value
@@ -69,7 +69,7 @@ function rotate_tile(old_data){
     return make_tile(new_data)
 }
 
-var discard_combo = 0
+let discard_combo = 0
 
 function action_discard_tile(){
     discard_combo++;
@@ -99,10 +99,10 @@ document.addEventListener("keypress",e=>{
 })
 
 function get_adjacant_tile_info(col, row) {
-    var top_tile = 0
-    var bot_tile = 0
-    var r_tile = 0
-    var l_tile = 0
+    let top_tile = 0
+    let bot_tile = 0
+    let r_tile = 0
+    let l_tile = 0
     if(row-1 >= 0){
         top_tile = JSON.parse(gameboard.children[row-1].children[col].dataset.type).bottom
     }
@@ -126,8 +126,8 @@ function place_tile(target_pos,tile){
 }
 
 function check_poins(tile_type, tile_attrib,adjacent_types){
-    var points = 5
-    var touching_tiles = 0
+    let points = 5
+    let touching_tiles = 0
     for(const type in adjacent_types){
         if(adjacent_types[type] > 0){
             touching_tiles++;
@@ -211,19 +211,19 @@ tile_to_place.appendChild(make_tile({
 function make_div() {
     return document.createElement("div")
 }
-var row = []
-var matrix = []
+let row = []
+const matrix = []
 
-for (var i = 1; i <= 51 * 51; i++) {
+for (let i = 1; i <= 51 * 51; i++) {
     row.push(0)
     if (i % 51 == 0 && i != 0) {
         matrix.push(row)
         row = []
     }
 }
-for (var row = 0; row < matrix.length; row++) {
+for (let row = 0; row < matrix.length; row++) {
     const div = make_div()
-    for (var col = 0; col < matrix[row].length; col++) {
+    for (let col = 0; col < matrix[row].length; col++) {
         div.appendChild(make_tile(naked_data, col, row))
     }
     gameboard.appendChild(div)
