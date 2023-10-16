@@ -151,4 +151,33 @@
 
 @media (max-width: 500px) {
 
+    .tile {
+        border-width: 36px;
+    }
+
+    .gamearea {
+        height: 4200px;
+    }
+    .gamearea > div {
+        width: 4200px;
+    }
+
+    .gamecontrol {
+        position: fixed;
+        padding: 10px;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .game-buttons{
+        width: 90%;
+        right: 0;
+        margin: 0 auto;
+    }
+
+    .popup {
+        width: 80%;
+        bottom: 80px;
+        margin: 5px;
+    }
   }
