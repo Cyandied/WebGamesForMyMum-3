@@ -4,6 +4,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding-bottom: 90px;
+    padding-top: 200px;
 }
 .gamearea > div {
     width: 5000px;
@@ -90,7 +92,7 @@
     height: 60px;
     width: 60px;
     background-color: rgba(128, 113, 158, 0.582);
-    font-size: 30px;
+    font-size: 25px;
     padding: 10px;
     border-radius: 20px;
     margin: 0;
@@ -126,7 +128,7 @@
     width: 0px;
     height: 0px;
     border-style: solid;
-    border-color: rgb(95, 81, 123);
+    border-color: rgb(83, 80, 90);
     border-width: 46px;
 }
 
@@ -149,7 +151,7 @@
     margin-top: 50vh;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 1000px) {
 
     .tile {
         border-width: 36px;
