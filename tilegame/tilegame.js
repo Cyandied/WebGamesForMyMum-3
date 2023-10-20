@@ -329,7 +329,7 @@ function make_tile(data, col, row, attrib) {
         }
         else if (!["touch 1", "touch 2", "touch 3", "touch 4"].includes(attrib)) {
             const dice_roll = roll_dice()
-            if (dice_roll > 30) {
+            if (dice_roll > 35) {
                 const nr = Math.floor(Math.random() * 4 + 1)
                 tile.dataset.attrib = `touch ${nr}`
                 span.innerHTML = `touch ${nr}`
