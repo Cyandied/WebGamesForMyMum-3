@@ -30,6 +30,7 @@
     border-radius: 20px;
     background-color: rgb(27, 26, 29);
     gap: 10px;
+    z-index: 100;
 }
 
 .popup>h2 {
@@ -54,9 +55,11 @@
     border-radius: 20px;
     background-color: rgb(27, 26, 29);
     gap: 10px;
+    z-index: 100;
 }
 
 .game-buttons {
+    z-index: 100;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -130,9 +133,30 @@
     border-style: solid;
     border-color: rgb(83, 80, 90);
     border-width: 46px;
+    pointer-events: none;
 }
 
-.tile:hover {
+.tile-wrapper {
+    position: relative;
+    z-index: 1;
+    height: 92px;
+    width: 92px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.tile-symbol {
+    position: absolute;
+    text-align: center;
+    font-size: 30px;
+    margin: 0;
+    text-shadow: 1px 1px 2px black;
+}
+
+.tile-wrapper:hover {
     box-shadow: 0 0px 20px 0 rgba(43, 26, 57, 0.79);
 }
 
@@ -149,6 +173,11 @@
 
 .game-over > h1 {
     margin-top: 50vh;
+}
+
+#again {
+    color: black;
+    font-size: 30px;
 }
 
 @media (max-width: 1000px) {
