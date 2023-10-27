@@ -8,6 +8,7 @@ const tile_style_sheet = document.querySelector("#tile-style-sheet")
 const popup = document.querySelector(".popup")
 const discard_counter = document.querySelector("#counter")
 const tile_counter = document.querySelector("#tile-counter")
+const tile_max = document.querySelector("#tile-max")
 
 const naked_data = {
     "top": 0,
@@ -41,8 +42,11 @@ function make_saved_board(saved_board){
     points = saved_board.points
     points_counter.innerHTML = points
     tiles_placed = saved_board.tiles_placed
+    tile_counter.innerHTML = tiles_placed
     discard_combo = saved_board.discard_combo
     discard_counter.innerHTML = discard_combo
+
+    tile_max.innerHTML = gameboard_size*gameboard_size - discard_combo
 
     for (let row = 0; row < gameboard_size; row++) {
         const div = document.createElement("div")
@@ -166,6 +170,7 @@ function display_points(){
 function action_discard_tile() {
     discard_combo++;
     discard_counter.innerHTML = discard_combo
+    tile_max.innerHTML = gameboard_size*gameboard_size - discard_combo
     if (tiles_placed + discard_combo == 49) {
         game_over_screen.classList.remove("hidden")
         game_over_screen.appendChild(display_points())
