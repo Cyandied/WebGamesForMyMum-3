@@ -16,13 +16,12 @@ body {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
-#menu {
+.menu {
     margin: 0 auto;
     width: 85%;
-    background-color: rgb(45, 44, 48);
     min-height: 80vh;
     margin-top: 5vh;
     border-radius: 20px;
@@ -53,17 +52,25 @@ a {
     font-size: 25px;
     text-decoration: none;
     font-weight: bold;
+    margin: 5px;
 }
 
 @media (max-width: 500px) {
+    .menu {
+        width: 90%;
+        padding: 0px;
+    }
     a {
         width: 70%;
+        font-size: 20px;
+        height: 50px;
+        padding: 5px;
     }
 
     h1 {
         font-size: 25px;
     }
-  }
+}
 
 
 a:hover, a:active {

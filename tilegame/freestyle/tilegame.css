@@ -1,6 +1,6 @@
 
 .gamearea {
-    height: 5000px;
+    height: 3040px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -8,7 +8,7 @@
     padding-top: 200px;
 }
 .gamearea > div {
-    width: 5000px;
+    width: 3040px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -171,8 +171,9 @@
     text-align: center;
 }
 
-.game-over > h1 {
+.game-over > .big {
     margin-top: 50vh;
+    margin-bottom: 2vh;
 }
 
 #again {
@@ -187,10 +188,11 @@
     }
 
     .gamearea {
-        height: 4200px;
+        height: 2570px;
+        padding-bottom: 350px;
     }
     .gamearea > div {
-        width: 4200px;
+        width: 2570px;
     }
 
     .gamecontrol {

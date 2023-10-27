@@ -1,14 +1,16 @@
 
 .gamearea {
-    height: 5000px;
+    height: 700px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-bottom: 90px;
+    align-items: center;
+    padding-bottom: 10px;
     padding-top: 200px;
+    margin: 0 auto;
 }
 .gamearea > div {
-    width: 5000px;
+    width: 700px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -171,8 +173,9 @@
     text-align: center;
 }
 
-.game-over > h1 {
+.game-over > .big {
     margin-top: 50vh;
+    margin-bottom: 2vh;
 }
 
 #again {
@@ -186,11 +189,17 @@
         border-width: 36px;
     }
 
+    .tile-wrapper {
+        height: 72px;
+        width: 72px;
+    }
+
     .gamearea {
-        height: 4200px;
+        height: 576px;
+        padding: 220px 320px 80px;
     }
     .gamearea > div {
-        width: 4200px;
+        width: 576px;
     }
 
     .gamecontrol {

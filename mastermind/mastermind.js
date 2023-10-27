@@ -67,6 +67,18 @@ function check_W(num){
     return false
 }
 
+function make_solution_display(){
+    const div = document.createElement("div")
+    for(const num of code){
+        const dot = document.createElement("div")
+        dot.classList.add("input-dot")
+        const color = Object.keys(color_num).filter(key => color_num[key] === num)
+        dot.classList.add(color)
+        div.appendChild(dot)
+    }
+    return div
+}
+
 function make_reload_btn(){
     const button = document.createElement("button")
     button.id = "again"
@@ -83,7 +95,6 @@ guess.addEventListener("click", e=>{
         const children = input.children
         const div = document.createElement("div")
         for(var i = 0; i < 4; i++){
-            console.log(children[0])
             guess_combination.push(color_num[children[0].dataset.color])
             div.appendChild(children[0])
         }
@@ -94,6 +105,10 @@ guess.addEventListener("click", e=>{
             const msg = document.createElement("h1")
             msg.innerHTML = "DU VANDT!"
             res.appendChild(msg)
+            const msg2 = document.createElement("h2")
+            msg2.innerHTML = "Du fandt koden:"
+            res.appendChild(msg2)
+            res.appendChild(make_solution_display())
             res.appendChild(make_reload_btn())
         }
         else if(display_c.childElementCount == 12){
@@ -101,6 +116,10 @@ guess.addEventListener("click", e=>{
             const msg = document.createElement("h1")
             msg.innerHTML = "DU TABTE!"
             res.appendChild(msg)
+            const msg2 = document.createElement("h2")
+            msg2.innerHTML = "Koden var:"
+            res.appendChild(msg2)
+            res.appendChild(make_solution_display())
             res.appendChild(make_reload_btn())
         }
         else{

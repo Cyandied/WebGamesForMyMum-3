@@ -7,6 +7,7 @@ const color_select = document.querySelector("#color-select")
 const tile_style_sheet = document.querySelector("#tile-style-sheet")
 const popup = document.querySelector(".popup")
 const discard_counter = document.querySelector("#counter")
+const tile_counter = document.querySelector("#tile-counter")
 
 const naked_data = {
     "top": 0,
@@ -17,13 +18,13 @@ const naked_data = {
 
 const classes = ["one", "two", "three", "four", "five", "six"]
 
-const gameboard_size = 51
+const gameboard_size = 7
 
 let round = 0
 let points = 0
 let tiles_placed = 0
 let discard_combo = 0
-const local_storage_board = localStorage.getItem("board")
+const local_storage_board = localStorage.getItem("board-challenge")
 
 function make_new_board() {
     for (let row = 0; row < gameboard_size; row++) {
@@ -66,7 +67,7 @@ else if(!JSON.parse(local_storage_board).active){
 else{
     make_saved_board(JSON.parse(local_storage_board))
 }
-gameboard.children[25].children[25].scrollIntoView({ block: "center", inline: "center" })
+gameboard.children[3].children[3].scrollIntoView({ block: "center", inline: "center" })
 
 if(round == 0){
     tile_to_place.appendChild(make_tile({
@@ -75,6 +76,10 @@ if(round == 0){
         "right": 3,
         "left": 4
     }, null, null, "none"))
+}
+else if(JSON.parse(local_storage_board).active){
+    const next_tile = JSON.parse(local_storage_board)["next-tile"]
+    tile_to_place.appendChild(make_tile(next_tile.type,null, null, next_tile.attrib))
 }
 else {
     tile_to_place.appendChild(make_tile(rand_tile_type()))
@@ -161,6 +166,12 @@ function display_points(){
 function action_discard_tile() {
     discard_combo++;
     discard_counter.innerHTML = discard_combo
+    if (tiles_placed + discard_combo == 49) {
+        game_over_screen.classList.remove("hidden")
+        game_over_screen.appendChild(display_points())
+        game_over_screen.appendChild(make_reload_btn())
+        return
+    }
     tile_to_place.replaceChild(make_tile(rand_tile_type()), tile_to_place.children[0])
 }
 
@@ -175,6 +186,7 @@ function action_rotate_tile() {
 function action_save() {
     const game = []
     const wrap = {}
+    const next_tile = tile_to_place.children[0]
     for (let row = 0; row < gameboard.children.length; row++) {
         const game_row = []
         for (let col = 0; col < gameboard.children[row].children.length; col++) {
@@ -193,7 +205,8 @@ function action_save() {
     wrap["tiles_placed"] = tiles_placed
     wrap["round"] = round
     wrap["discard_combo"] = discard_combo
-    localStorage.setItem("board", JSON.stringify(wrap))
+    wrap["next-tile"] = {"type":JSON.parse(next_tile.dataset.type),"pos":JSON.parse(next_tile.dataset.pos),"attrib": next_tile.dataset.attrib}
+    localStorage.setItem("board-challenge", JSON.stringify(wrap))
 }
 
 document.addEventListener("keypress", e => {
@@ -231,9 +244,10 @@ function get_adjacant_tile_info(col, row) {
 
 function place_tile(target_pos, tile) {
     tiles_placed++;
+    tile_counter.innerHTML = tiles_placed
     gameboard.children[target_pos.row].replaceChild(tile, gameboard.children[target_pos.row].children[target_pos.col])
     tile_to_place.appendChild(make_tile(rand_tile_type()))
-    if (tiles_placed == 100) {
+    if (tiles_placed + discard_combo == 49) {
         game_over_screen.classList.remove("hidden")
         game_over_screen.appendChild(display_points())
         game_over_screen.appendChild(make_reload_btn())
@@ -335,8 +349,12 @@ function make_tile(data, col, row, attrib) {
         }
         else if (!["touch 1", "touch 2", "touch 3", "touch 4"].includes(attrib)) {
             const dice_roll = roll_dice()
-            if (dice_roll > 35) {
-                const nr = Math.floor(Math.random() * 4 + 1)
+            if (dice_roll > 35 && tiles_placed > 2) {
+                let nr = Math.floor(Math.random() * 4 + 1)
+                while(nr > tiles_placed - 2){
+                    console.log(nr)
+                    nr = Math.floor(Math.random() * 4 + 1)
+                }
                 tile.dataset.attrib = `touch ${nr}`
                 span.innerHTML = `touch ${nr}`
             }
