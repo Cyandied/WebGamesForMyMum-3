@@ -82,7 +82,7 @@ else {
 
 color_select.addEventListener("change", e => {
     const tile_style = color_select.value
-    tile_style_sheet.setAttribute("href", `tile_styles/${tile_style}.css`)
+    tile_style_sheet.setAttribute("href", `../tile_styles/${tile_style}.css`)
 })
 
 function roll_dice() {
@@ -152,13 +152,14 @@ function make_reload_btn() {
     return button
 }
 
+function display_points(){
+    const h1 = document.createElement("h1")
+    h1.innerHTML = `Du fik ${points} point!`
+    return h1
+}
+
 function action_discard_tile() {
     discard_combo++;
-    if (discard_combo > 3) {
-        game_over_screen.classList.remove("hidden")
-        game_over_screen.appendChild(make_reload_btn())
-        return
-    }
     discard_counter.innerHTML = discard_combo
     tile_to_place.replaceChild(make_tile(rand_tile_type()), tile_to_place.children[0])
 }
@@ -232,6 +233,11 @@ function place_tile(target_pos, tile) {
     tiles_placed++;
     gameboard.children[target_pos.row].replaceChild(tile, gameboard.children[target_pos.row].children[target_pos.col])
     tile_to_place.appendChild(make_tile(rand_tile_type()))
+    if (tiles_placed == 100) {
+        game_over_screen.classList.remove("hidden")
+        game_over_screen.appendChild(display_points())
+        game_over_screen.appendChild(make_reload_btn())
+    }
 }
 
 function check_attrib_points(attrib, adjacent_types) {
