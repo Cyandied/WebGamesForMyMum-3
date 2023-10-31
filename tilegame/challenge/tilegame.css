@@ -8,6 +8,7 @@
     padding-bottom: 10px;
     padding-top: 200px;
     margin: 0 auto;
+    padding-left: 30%;
 }
 .gamearea > div {
     width: 700px;
@@ -72,7 +73,7 @@
     margin: 20px;
     border-radius: 20px;
     bottom: 0;
-    right: 0;
+    left: 0;
     gap: 10px;
 }
 
