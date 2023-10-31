@@ -211,6 +211,7 @@ function action_save() {
     wrap["round"] = round
     wrap["discard_combo"] = discard_combo
     wrap["next-tile"] = {"type":JSON.parse(next_tile.dataset.type),"pos":JSON.parse(next_tile.dataset.pos),"attrib": next_tile.dataset.attrib}
+    show_popup("Spil gemt!")
     localStorage.setItem("board-challenge", JSON.stringify(wrap))
 }
 
