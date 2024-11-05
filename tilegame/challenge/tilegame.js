@@ -298,12 +298,30 @@ function check_poins(tile_type, tile_attrib, adjacent_types) {
         points += 20
     }
     points += check_attrib_points(tile_attrib, adjacent_types)
+    points += check_color_points(tile_type)
     points += touching_tiles * 10
     if (points > 30) {
         show_popup(`${points} point!`)
     }
     return points
 }
+
+function check_color_points(tile_type){
+    const list_vals = Object.values(tile_type)
+    let highest = 0;
+    for(const val in list_vals){
+        const num_list = list_vals.filter(x => x==list_vals[val])
+        const num = num_list.length
+        if(num > highest){
+            highest = num
+        }
+    }
+    if(highest > 1){
+        return highest * 10
+    }
+    return 0
+}
+
 
 function check_if_can_place(target_type, target_pos) {
     if (JSON.stringify(target_type) != JSON.stringify(naked_data)) {
@@ -323,9 +341,9 @@ function check_if_can_place(target_type, target_pos) {
             (type.left == adjacent_types.left || adjacent_types.left == 0)
         ) {
             round++;
-            place_tile(target_pos, tile)
             points += check_poins(type, attrib, adjacent_types)
             points_counter.innerHTML = points
+            place_tile(target_pos, tile)
         }
         else {
             show_popup("En eller flere sider macher ikke!")

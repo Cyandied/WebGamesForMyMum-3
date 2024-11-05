@@ -286,11 +286,28 @@ function check_poins(tile_type, tile_attrib, adjacent_types) {
         points += 20
     }
     points += check_attrib_points(tile_attrib, adjacent_types)
+    points += check_color_points(tile_type)
     points += touching_tiles * 10
     if (points > 30) {
         show_popup(`${points} point!`)
     }
     return points
+}
+
+function check_color_points(tile_type){
+    const list_vals = Object.values(tile_type)
+    let highest = 0;
+    for(const val in list_vals){
+        const num_list = list_vals.filter(x => x==list_vals[val])
+        const num = num_list.length
+        if(num > highest){
+            highest = num
+        }
+    }
+    if(highest > 1){
+        return highest * 10
+    }
+    return 0
 }
 
 function check_if_can_place(target_type, target_pos) {
