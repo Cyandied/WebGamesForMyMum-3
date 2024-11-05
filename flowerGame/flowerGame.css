@@ -21,7 +21,6 @@ div a {
 }
 
 #gardenArea {
-    background-color: blue;
     width: 70%;
     height: 100%;
     display: flex;
@@ -35,7 +34,6 @@ div a {
     width: 98%;
     display: flex;
     flex-direction: column;
-    background-color: bisque;
     gap: 5px;
 }
 
@@ -55,7 +53,39 @@ div a {
 .row > div {
     position: relative;
     z-index: 1;
-    height: 92px;
-    width: 92px;
-    background-color: aquamarine;
+    height: 90px;
+    width: 90px;
+    background-color: rgb(104, 71, 52);
+    border-radius: 30px;
+    border-style: solid;
+    border-color: rgb(104, 71, 52);
+    border-width: 10px;
+}
+
+.flowerdot {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    border-radius: 30px;
+}
+
+.highlight {
+    border-color: yellow !important;
+}
+
+.disabled {
+    background-color: gray !important;
+    border-color: black !important;
+}
+
+.r {
+    background-color: red;
+}
+
+.g {
+    background-color: green;
+}
+
+.b {
+    background-color: blue;
 }
