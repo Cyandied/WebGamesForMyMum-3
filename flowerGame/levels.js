@@ -11,19 +11,29 @@ class Flower {
         }
     }
     combine(otherFlower){
-        const newColors = [];
-        for (let index = 0; index < this.petalAmount; index++) {
-            newColors.push(this.petals[i].combine(otherFlower.petals[i]));
+        const newPetals = [];
+        for (let i = 0; i < this.petalAmount; i++) {
+            newPetals.push(this.petals[i].combine(otherFlower.petals[i]));
         }
-        return new Flower(this.petalAmount,newColors);
+        const newFlower = new Flower(this.petalAmount);
+        newFlower.petals = newPetals;
+        return newFlower;
     }
 
-    makeNew(flowers){
-        const newColors = []
-        for (let index = 0; index < flowers[0].petalAmount; index++) {
-            newColors.push(flowers[i].petals[i].color);
-        }
-        return new Flower(flowers[0].petalAmount,newColors);
+    makeNew(flower,toreplace){
+        const newPetals = this.petals;
+        const newFlower = new Flower(this.petalAmount);
+        newFlower.petals = newPetals;
+        newFlower.petals[toreplace-1] = flower.petals[toreplace-1];
+        return newFlower;
+    }
+
+    makeFromJSON(json){
+        this.petalAmount = json["petalAmount"];
+        this.petals = [];
+        json["petals"].forEach(petal => {
+            this.petals.push(new Petal(petal["color"]));
+        })
     }
 }
 
@@ -59,7 +69,7 @@ class Petal {
                 newColor.push(c);
             }
         })
-        return newColor;
+        return new Petal(newColor);
     }
 }
 

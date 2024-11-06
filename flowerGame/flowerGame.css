@@ -48,6 +48,7 @@ div a {
     flex-direction: row;
     justify-content: center;
     gap: 5px;
+    pointer-events: none;
 }
 
 .row > div {
@@ -60,6 +61,58 @@ div a {
     border-style: solid;
     border-color: rgb(104, 71, 52);
     border-width: 10px;
+    pointer-events:all;
+}
+
+.row > div:hover {
+    background-color: rgb(70, 46, 32);
+    border-color: rgb(70, 46, 32);
+    cursor: pointer;
+}
+
+#inventory {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+#inventory > div {
+    position: relative;
+    z-index: 1;
+    height: 90px;
+    width: 90px;
+    background-color: grey;
+    border-radius: 30px;
+    border-style: solid;
+    border-color: gray;
+    border-width: 10px;
+}
+
+#inventory > div > span {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    background-color: rgba(0, 0, 0, 0.507);
+    padding: 3px 5px;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    user-select: none;
+    pointer-events: none;
+}
+
+#inventory > div:hover {
+    border-color: rgb(75, 75, 75);
+    cursor: pointer;
+}
+
+#pointerFollower {
+    z-index: 1000;
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    pointer-events: none;
 }
 
 .flowerdot {
@@ -67,6 +120,7 @@ div a {
     height: 30px;
     width: 30px;
     border-radius: 30px;
+    pointer-events: none;
 }
 
 .highlight {
@@ -76,16 +130,88 @@ div a {
 .disabled {
     background-color: gray !important;
     border-color: black !important;
+    cursor: default !important;
+    pointer-events:none;
 }
 
 .r {
     background-color: red;
 }
-
 .g {
     background-color: green;
 }
-
 .b {
     background-color: blue;
+}
+.k {
+    background-color: black;
+}
+.w {
+    background-color: white;
+}
+
+.r.b {
+    background-color: purple;
+}
+
+.r.g {
+    background-color: yellow;
+}
+
+.b.g {
+    background-color: rgb(64, 224, 171);
+}
+
+.k.r {
+    background-color: rgb(71, 0, 0);
+}
+.k.b {
+    background-color: rgb(0, 17, 65);
+}
+.k.g {
+    background-color: rgb(0, 46, 4);
+}
+
+.w.r {
+    background-color: rgb(255, 141, 141);
+}
+.w.b {
+    background-color: rgb(111, 150, 255);
+}
+.w.g {
+    background-color: rgb(135, 255, 145);
+}
+
+.k.r.b {
+    background-color: rgb(39, 0, 39);
+}
+
+.k.r.g {
+    background-color: rgb(41, 41, 0);
+}
+
+.k.b.g {
+    background-color: rgb(0, 59, 40);
+}
+
+.w.r.b {
+    background-color: rgb(255, 140, 255);
+}
+
+.w.r.g {
+    background-color: rgb(255, 255, 163);
+}
+
+.w.b.g {
+    background-color: rgb(157, 255, 224);
+}
+
+.r.g.b {
+    background-color: rgb(110, 61, 17);
+}
+.k.r.g.b {
+    background-color: rgb(36, 17, 0);
+}
+.w.r.g.b {
+    background-color: rgb(109, 89, 71);
 }
