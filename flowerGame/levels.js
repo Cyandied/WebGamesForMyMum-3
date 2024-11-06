@@ -10,6 +10,16 @@ class Flower {
             this.petals = [new Petal(petal1.split(",")),new Petal(petal2.split(",")),new Petal(petal3.split(",")),new Petal(petal4.split(",")),new Petal(petal5.split(","))];
         }
     }
+
+    compareSame(otherFlower){
+        for (let i = 0; i < this.petalAmount; i++){
+            if(!this.petals[i].compareSame(otherFlower.petals[i])){
+                return false;
+            }
+        }
+        return true;
+    }
+
     combine(otherFlower){
         const newPetals = [];
         for (let i = 0; i < this.petalAmount; i++) {
@@ -21,10 +31,11 @@ class Flower {
     }
 
     makeNew(flower,toreplace){
+        console.log(toreplace);
         const newPetals = this.petals;
         const newFlower = new Flower(this.petalAmount);
         newFlower.petals = newPetals;
-        newFlower.petals[toreplace-1] = flower.petals[toreplace-1];
+        newFlower.petals[toreplace] = flower.petals[toreplace];
         return newFlower;
     }
 
@@ -40,6 +51,10 @@ class Flower {
 class Petal {
     constructor(color){
         this.color = color;
+    }
+
+    compareSame(otherPetal){
+        return (otherPetal.color.sort().join(",") == this.color.sort().join(","))
     }
 
     combine(otherPetal) {
@@ -91,7 +106,7 @@ class Level {
 
 const levelList = document.querySelector(".levelList");
 
-const testLevel = new Level(
+const tutLevel1 = new Level(
     3,3,3,
     {
         "r":1,
@@ -113,15 +128,37 @@ const testLevel = new Level(
     [new Flower(3,"b")]
 );
 
+const tutLevel2 = new Level(
+    3,3,3,
+    {
+        "r":1,
+        "g":1,
+        "b":0,
+        "k":0,
+        "w":0
+    },
+    [
+        new Flower(3,"","r","g","b")
+    ],
+    "Please place the red flower on any highlighted tiles",
+    "Well done!",
+    [
+        ["x","h","x"],
+        ["x","x","x"],
+        ["h","x","f,1"]
+    ],
+    [new Flower(3,"b")]
+);
+
 const levels = {
     "Tutorial":
-    [testLevel,testLevel,testLevel,testLevel],
+    [tutLevel1,tutLevel2],
     "Easy":
-    [testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel],
+    [],
     "Medium":
-    [testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel],
+    [],
     "Hard":
-    [testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel,testLevel]
+    []
 }
 
 function makeFalseList(len){
@@ -141,32 +178,31 @@ function setComplete(pack,id){
 
 if(levelList){
     Object.keys(levels).forEach(levelName => {
+        const h1 = document.createElement("h1");
+        h1.innerHTML = levelName;
+        document.body.appendChild(h1);
+        const newList = levelList.cloneNode(true);
         var item = localStorage.getItem(levelName)
        if(item){
            item = JSON.parse(item);
-           for (let i = 0; i < item.length; i++) {
-               levels[levelName][i].levelComplete = item[i];
+            for (let i = 0; i < item.length; i++) {
+                const lvl = levels[levelName][i];
+                levels[levelName][i].levelComplete = item[i];
+                const a = document.createElement("a");
+                a.innerHTML = i+1;
+                a.href = `level.html?pack=${levelName}&id=${i}`
+                a.dataset.pack = levelName;
+                a.dataset.id = i;
+                if(lvl.levelComplete){
+                    a.classList.add("lvlC");
+                }
+                newList.appendChild(a);
+                newList.classList.remove("hidden");
            }
        }
        else {
            localStorage.setItem(levelName,JSON.stringify(makeFalseList(levels[levelName].length)));
        }
-       const h1 = document.createElement("h1");
-       h1.innerHTML = levelName;
-       document.body.appendChild(h1);
-       const newList = levelList.cloneNode(true);
-       levels[levelName].forEach(function callBack(lvl,i) {
-           const a = document.createElement("a");
-           a.innerHTML = i+1;
-           a.href = `level.html?pack=${levelName}&id=${i}`
-           a.dataset.pack = levelName;
-           a.dataset.id = i;
-           if(lvl.levelComplete){
-               a.classList.add("lvlC");
-           }
-           newList.appendChild(a);
-           newList.classList.remove("hidden");
-       })
        document.body.appendChild(newList);
    })
 }

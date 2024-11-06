@@ -6,9 +6,6 @@ const urlParams = new URLSearchParams(url);
 const pack = urlParams.get("pack");
 const id = urlParams.get("id");
 
-console.log(pack + " " + id);
-console.log(levels[pack][id]);
-
 const level = levels[pack][id];
 
 const rowTempalte = document.querySelector(".row");
@@ -16,6 +13,9 @@ const gardenWrapper = document.querySelector("#gardenWrapper");
 
 const inventory = document.querySelector("#inventory");
 const pFollower = document.querySelector("#pointerFollower");
+
+const hideWinScreen = document.querySelector("#hideScreen");
+const winScreen = document.querySelector("#winScreen");
 
 const playGrid = [];
 var playerInventory = {};
@@ -101,6 +101,10 @@ document.body.onpointermove = event => {
     }, {duration:1000, fill:"forwards"})
 }
 
+hideWinScreen.addEventListener("click",e=> {
+    winScreen.classList.add("hidden");
+})
+
 function createFlower(flower,target){
     const petal = document.createElement("div");
     target.dataset.state = "f";
@@ -132,6 +136,7 @@ function placeFlower(e){
     removeFlower(pFollower);
     playerHand = "";
     seekMerge(x,y);
+    seekGenerate(x,y);
 }
 
 function seekMerge(parentx,parenty){
@@ -149,24 +154,87 @@ function seekMerge(parentx,parenty){
         }
         const target = playGrid[y][x];
         if(target.dataset.state.includes("f")){
-            removeFlower(target);
             const targetFlower = new Flower(1);
             targetFlower.makeFromJSON(JSON.parse(target.dataset.flower));
+            removeFlower(target);
             const mainFlower = new Flower(1);
             mainFlower.makeFromJSON(JSON.parse(playGrid[parenty][parentx].dataset.flower));
             const newFlower = mainFlower.combine(targetFlower);
             removeFlower(playGrid[parenty][parentx]);
             createFlower(newFlower,playGrid[parenty][parentx]);
+            const win = checkWin(newFlower);
+            if(win){
+                setComplete(pack,id);
+                winScreen.classList.remove("hidden");
+            }
         }
     }
 }
 
-function seekGenerate(x,y){
+function seekGenerate(px,py){
+    const ogFlower = new Flower(1);
+    ogFlower.makeFromJSON(JSON.parse(playGrid[py][px].dataset.flower));
+    if(level.pAmount == 3){
+        const newParents = [
+            [px+1,py],
+            [px,py+1],
+            [px-1,py],
+            [px,py-1]
+        ];
+        for(let pxy of newParents){
+            const parentx = pxy[0];
+            const parenty = pxy[1];
+            if(parentx >= level.gridx || parentx < 0 || parenty >= level.gridy || parenty < 0){
+                continue;
+            }
+            const seek = [
+                [parentx+1,parenty],
+                [parentx,parenty+1],
+                [parentx-1,parenty]
+            ]
+            for(let i = 0; i < seek.length; i++){
+                const xy = seek[i];
+                const x = xy[0];
+                const y = xy[1];
+                if(x >= level.gridx || x < 0 || y >= level.gridy || y < 0){
+                    continue;
+                }
+                const target = playGrid[y][x];
+                if(target.dataset.state.includes("f") && (x != px || y != py)){
+                    const targetFlower = new Flower(1);
+                    targetFlower.makeFromJSON(JSON.parse(target.dataset.flower));
+                    removeFlower(target);
+                    const newFlower = targetFlower.makeNew(ogFlower,i);
+                    removeFlower(playGrid[py][px]);
+                    createFlower(newFlower,playGrid[parenty][parentx]);
+                    const win = checkWin(newFlower);
+                    if(win){
+                        setComplete(pack,id);
+                        winScreen.classList.remove("hidden");
+                    }
+                }
+            }
+        }
+    }
+}
 
+function checkWin(flower){
+    for(let orderFlower of level.order){
+        if(orderFlower.compareSame(flower)){
+            const i = level.order.indexOf(orderFlower);
+            const x = level.order.splice(i,1);
+        }
+    }
+    if(level.order.length == 0){
+        return true;
+    }
+    return false;
 }
 
 function removeFlower(target){
     target.innerHTML="";
+    target.dataset.state = "";
+    target.dataset.flower = "";
 }
 
 
