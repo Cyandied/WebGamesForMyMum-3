@@ -13,6 +13,10 @@ div a {
     height: 3vh;
 }
 
+a:hover{
+    cursor: pointer;
+}
+
 .wrapper {
     display: flex;
     flex-direction: row;
@@ -38,8 +42,38 @@ div a {
 }
 
 #controlArea {
+    display: flex;
+    flex-direction: row;
     width: 30%;
     height: 100%;
+}
+
+#controlWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+#order {
+    padding: 10px 10px;
+    background-color: rgba(0, 0, 0, 0.362);
+    border-radius: 30px;
+    width: 100%-20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 360px;
+    overflow-y: scroll;
+    gap: 5px;
+}
+
+#msg {
+    padding: 20px 20px;
+    background-color: rgba(0, 0, 0, 0.362);
+    border-radius: 30px;
+    width: 100%-40px;
+    font-size: 20px;
 }
 
 .row {
@@ -70,17 +104,20 @@ div a {
 }
 
 #inventory {
+    padding: 0 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
 }
 
-#inventory > div {
+#inventory > div, #order > div {
     position: relative;
     z-index: 1;
     height: 90px;
     width: 90px;
+    min-height: 90px;
+    min-width: 90px;
     background-color: grey;
     border-radius: 30px;
     border-style: solid;
@@ -119,7 +156,7 @@ div a {
     height: 30px;
     width: 30px;
     border-radius: 30px;
-    pointer-events: none;
+    pointer-events:none;
 }
 
 .highlight {
@@ -221,7 +258,7 @@ button:hover {
 }
 
 .k.r.g {
-    background-color: rgb(41, 41, 0);
+    background-color: rgb(68, 68, 0);
 }
 
 .k.b.g {
@@ -248,4 +285,8 @@ button:hover {
 }
 .w.r.g.b {
     background-color: rgb(109, 89, 71);
+}
+
+.k.w {
+    background-color: gray;
 }
