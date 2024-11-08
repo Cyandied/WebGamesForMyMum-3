@@ -263,13 +263,14 @@ function animateGenerate(petal, target){
 }
 
 function animateMerge(petal, target){
-    let i = petal;
-    const p = target.children[i];
-    switch(petal){
-        case 0: animatePetal(60,60,p); break;
-        case 1: animatePetal(60,-60,p); break;
-        case 2: animatePetal(-60,-60,p); break;
-        case 3: animatePetal(-60,60,p); break;
+    const children = target.children;
+    for(let p of children){
+        switch(petal){
+            case 0: animatePetal(60,60,p); break;
+            case 1: animatePetal(60,-60,p); break;
+            case 2: animatePetal(-60,-60,p); break;
+            case 3: animatePetal(-60,60,p); break;
+        }
     }
 }
 
