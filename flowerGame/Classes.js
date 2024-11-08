@@ -1,10 +1,10 @@
 export {Level,Flower};
 
 class Level {
-    constructor(gridx,gridy,petals,pflowers,order,msgb = NaN,msga = NaN,startState = NaN,startFlowers = NaN) {
+    constructor(gridx,gridy,pflowers,order,msgb = NaN,msga = NaN,startState = NaN,startFlowers = NaN) {
         this.gridx = gridx;
         this.gridy = gridy;
-        this.pAmount = petals;
+        this.pAmount = 4;
         this.playerFlowers = pflowers;
         this.order = order;
         this.messageBefore = msgb;
@@ -17,18 +17,18 @@ class Level {
 }
 
 class Flower {
-    constructor(petalAmount,universal="", petal1="",petal2="",petal3="",petal4="",petal5=""){
-        this.petalAmount = petalAmount;
+    constructor(universal="", petal1="",petal2="",petal3="",petal4="",petal5=""){
+        this.petalAmount = 4;
         if(petal1==""){
-            this.petals = [new Petal(universal.split(",")),new Petal(universal.split(",")),new Petal(universal.split(",")),new Petal(universal.split(",")),new Petal(universal.split(","))];
+            this.petals = [new Petal(universal.split(",")),new Petal(universal.split(",")),new Petal(universal.split(",")),new Petal(universal.split(","))];
         }
         else {
-            this.petals = [new Petal(petal1.split(",")),new Petal(petal2.split(",")),new Petal(petal3.split(",")),new Petal(petal4.split(",")),new Petal(petal5.split(","))];
+            this.petals = [new Petal(petal1.split(",")),new Petal(petal2.split(",")),new Petal(petal3.split(",")),new Petal(petal4.split(","))];
         }
     }
 
     compareSame(otherFlower){
-        for (let i = 0; i < this.petalAmount; i++){
+        for (let i = 0; i < 4; i++){
             if(!this.petals[i].compareSame(otherFlower.petals[i])){
                 return false;
             }
@@ -38,17 +38,17 @@ class Flower {
 
     combine(otherFlower){
         const newPetals = [];
-        for (let i = 0; i < this.petalAmount; i++) {
+        for (let i = 0; i < 4; i++) {
             newPetals.push(this.petals[i].combine(otherFlower.petals[i]));
         }
-        const newFlower = new Flower(this.petalAmount);
+        const newFlower = new Flower();
         newFlower.petals = newPetals;
         return newFlower;
     }
 
     makeNew(flower,toreplace){
         const newPetals = this.petals;
-        const newFlower = new Flower(this.petalAmount);
+        const newFlower = new Flower();
         newFlower.petals = newPetals;
         newFlower.petals[toreplace] = flower.petals[toreplace];
         return newFlower;
@@ -89,8 +89,7 @@ class Petal {
         const newColor = [];
         for(var c of Object.keys(counter)){
             if(counter[c] > 1){
-                newColor.push(c);
-                return newColor;
+                return new Petal([c]);
             }
             else if (counter[c] > 0){
                 newColor.push(c);

@@ -1,5 +1,5 @@
 import { levels, setComplete } from "./levels.js";
-import { Level, Flower } from "./Classes.js";
+import { Flower } from "./Classes.js";
 
 const url = window.location.search;
 const urlParams = new URLSearchParams(url);
@@ -25,6 +25,8 @@ const reload = document.querySelector("#reload");
 reload.addEventListener("click",e=>{
     location.reload();
 })
+
+const petalAnimationTimer = 500;
 
 const playGrid = [];
 var playerInventory = {};
@@ -86,7 +88,7 @@ function setUpInventory() {
         plot.dataset.color = c;
         const span = document.createElement("span");
         span.innerHTML = playerInventory[c];
-        const flower = new Flower(level.pAmount, c);
+        const flower = new Flower(c);
         createFlower(flower, plot);
         plot.appendChild(span);
         inventory.appendChild(plot);
@@ -111,7 +113,7 @@ function setUpInventory() {
             span.innerHTML = playerInventory[col];
             playerHand = col;
             removeFlower(pFollower);
-            createFlower(new Flower(level.pAmount, col), pFollower);
+            createFlower(new Flower(col), pFollower);
         })
     })
 }
@@ -136,58 +138,58 @@ function createFlower(flower, target) {
     target.dataset.flower = JSON.stringify(flower);
     petal.classList.add("flowerdot");
     const petals = [];
-    const petalAm = flower.petalAmount;
-    for (let i = 0; i < petalAm; i++) {
+    for (let i = 0; i < 4; i++) {
         petals.push(petal.cloneNode(true));
         flower.petals[i].color.forEach(c => {
             petals[i].classList.add(c);
         });
         petals[i].style["transform-origin"] = `right ${15}px`;
-        petals[i].style.transform = `rotate(${(i + 0.00000001) / petalAm * 360}deg)`;
+        petals[i].style.transform = `rotate(${(i + 0.00000001) / 4 * 360}deg)`;
         petals[i].style.right = `${45}px`;
         petals[i].style.top = `${45 - 15}px`;
         target.appendChild(petals[i]);
-        target.addEventListener("mouseover",e=> {
-            if(!target.dataset.state.includes("f")){
-                return;
-            }
-            const msg = "1:"+flower.petals[0].color.sort() + "\n" + "2:"+flower.petals[1].color.sort()  + "\n" + "3:"+flower.petals[2].color.sort()
-            if(flower.petalAmount == 4){
-                msg += "\n"+"4:"+flower.petals[3].color.sort()
-            }
-            displayMsg(msg);
-        })
-        target.addEventListener("mouseout",e=> {
-            if(!target.dataset.state.includes("f")){
-                return;
-            }
-            displayMsg(level.messageBefore);
-        })
+        target.addEventListener("mouseover",displayFlowerContent);
+        target.addEventListener("mouseout", stopDisplayFlowerContent);
     }
 }
 
-function placeFlower(e) {
+function displayFlowerContent(e){
+    const target = e.target;
+    const flower = new Flower();
+    flower.makeFromJSON(JSON.parse(target.dataset.flower));
+    const msg = "1:"+flower.petals[0].color.sort() + "\n" + "2:"+flower.petals[1].color.sort()  + "\n" + "3:"+flower.petals[2].color.sort()+"\n"+"4:"+flower.petals[3].color.sort()
+    displayMsg(msg);
+}
+
+function stopDisplayFlowerContent(e){
+    displayMsg(level.messageBefore);
+};
+
+async function placeFlower(e) {
     const x = parseInt(e.target.dataset.x);
     const y = parseInt(e.target.dataset.y);
     const state = e.target.state;
     if (playerHand == "" || state == "d") {
         return;
     }
-    createFlower(new Flower(level.pAmount, playerHand), e.target);
+    createFlower(new Flower(playerHand), e.target);
     removeFlower(pFollower);
     playerHand = "";
-    seekMerge(x, y);
-    seekGenerate(x, y);
+    await seekMerge(x, y);
+    await seekGenerate(x, y);
 }
 
-function seekMerge(parentx, parenty) {
+const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+async function seekMerge(px, py) {
     const seek = [
-        [parentx + 1, parenty],
-        [parentx, parenty + 1],
-        [parentx - 1, parenty],
-        [parentx, parenty - 1]
+        [px + 1, py - 1],
+        [px + 1, py + 1],
+        [px - 1, py + 1],
+        [px - 1, py - 1]
     ]
-    for (let xy of seek) {
+    for (let i = 0; i < seek.length; i++) {
+        const xy = seek[i];
         const x = xy[0];
         const y = xy[1];
         if (x >= level.gridx || x < 0 || y >= level.gridy || y < 0) {
@@ -195,33 +197,31 @@ function seekMerge(parentx, parenty) {
         }
         const target = playGrid[y][x];
         if (target.dataset.state.includes("f")) {
+            animateMerge(i,target);
+            await pause(petalAnimationTimer);
             const targetFlower = flowersInPlay["" + x + y];
             removeFlower(target);
-            const mainFlower = flowersInPlay["" + parentx + parenty];
+            const mainFlower = flowersInPlay["" + px + py];
             const newFlower = mainFlower.combine(targetFlower);
-            removeFlower(playGrid[parenty][parentx]);
-            createFlower(newFlower, playGrid[parenty][parentx]);
+            removeFlower(playGrid[py][px])
+            createFlower(newFlower, playGrid[py][px])
             flowersInPlay["" + x + y] = newFlower;
-            const win = checkWin();
-            if (win) {
-                setComplete(pack, id);
-                winScreen.classList.remove("hidden");
-            }
         }
     }
+    setTimeout(()=>{checkWin();},petalAnimationTimer);
 }
 
-function seekGenerate(px, py) {
+async function seekGenerate(px, py) {
     const ogFlower = flowersInPlay["" + px + py];
     const newParents = [
-        [px + 1, py - 1],
-        [px + 1, py + 1],
-        [px - 1, py + 1],
-        [px - 1, py - 1]
+        [px + 1, py],
+        [px, py + 1],
+        [px - 1, py],
+        [px, py - 1]
     ];
+    let didGen = false;
     for (let i = 0; i < newParents.length; i++) {
         const pxy = newParents[i];
-        var toRepalce = i;
         const x = pxy[0];
         const y = pxy[1];
         if (x >= level.gridx || x < 0 || y >= level.gridy || y < 0) {
@@ -229,29 +229,59 @@ function seekGenerate(px, py) {
         }
         const target = playGrid[y][x];
         if (target.dataset.state.includes("f") && (x != px || y != py)) {
-            if (toRepalce == 0 && level.pAmount == 3) {
-                return;
-            }
-            if(level.pAmount == 3){
-                toRepalce--;
-            }
+            animateGenerate(i,playGrid[py][px]);
+            await pause(petalAnimationTimer);
+            didGen = true;
             const targetFlower = flowersInPlay["" + x + y];
-            removeFlower(target);
-            const newFlower = targetFlower.makeNew(ogFlower, toRepalce);
-            removeFlower(playGrid[py][px]);
+            removeFlower(target)
+            const newFlower = targetFlower.makeNew(ogFlower, i);
             createFlower(newFlower, playGrid[y][x]);
             flowersInPlay["" + x + y] = newFlower;
-            const win = checkWin();
-            if (win) {
-                setComplete(pack, id);
-                winScreen.classList.remove("hidden");
-            }
         }
+    }
+    if(didGen){
+        removeFlower(playGrid[py][px]);
+    }
+    setTimeout(()=>{checkWin();},petalAnimationTimer);
+}
+
+function animateGenerate(petal, target){
+    let i = petal+2;
+    if(i==4){
+        i=0;
+    }
+    if(i==5){
+        i=1;
+    }
+    const p = target.children[i];
+    switch(petal){
+        case 0: animatePetal(-60,0,p); break;
+        case 1: animatePetal(0,60,p); break;
+        case 2: animatePetal(60,0,p); break;
+        case 3: animatePetal(0,-60,p); break;
     }
 }
 
+function animateMerge(petal, target){
+    let i = petal;
+    const p = target.children[i];
+    switch(petal){
+        case 0: animatePetal(60,60,p); break;
+        case 1: animatePetal(60,-60,p); break;
+        case 2: animatePetal(-60,-60,p); break;
+        case 3: animatePetal(-60,60,p); break;
+    }
+}
+
+function animatePetal(amountR, amountT,p){
+    p.animate({
+        right: `${amountR+parseInt(p.style.right.split("p")[0])}px`,
+        top: `${amountT+parseInt(p.style.top.split("p")[0])}px`
+    }, { duration: 500, fill: "forwards" })
+}
+
 function checkWin() {
-    const checkOff = level.order;
+    const checkOff = [...level.order];
     for (let orderFlower of level.order) {
         for (let xy of Object.keys(flowersInPlay)) {
             if (orderFlower.compareSame(flowersInPlay[xy])) {
@@ -262,9 +292,9 @@ function checkWin() {
     }
     if (checkOff.length == 0) {
         displayMsg(level.messageAfter);
-        return true;
+        setComplete(pack, id);
+        winScreen.classList.remove("hidden");
     }
-    return false;
 }
 
 function removeFlower(target) {
@@ -272,6 +302,8 @@ function removeFlower(target) {
     target.innerHTML = "";
     target.dataset.state = "";
     target.dataset.flower = "";
+    target.removeEventListener("mouseover",displayFlowerContent);
+    target.removeEventListener("mouseout", stopDisplayFlowerContent);
 }
 
 

@@ -152,6 +152,7 @@ a:hover{
 }
 
 .flowerdot {
+    z-index: 20;
     position: absolute;
     height: 30px;
     width: 30px;

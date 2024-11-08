@@ -13,40 +13,17 @@
         <a href="flowerGame.html" style="margin: 0 auto;">Blomster spil</a>
         <div>
             <h1>Regler:</h1>
-Flower game 
-
-Brainstorm:
-I want there to be some color mixing mechanincs
-The games goal will be to deliver orders
-
-Rules:
-Set grid garden
-
-Flowers can be placed freely but not removed
-
-If two flowers are placed besides each other, they will combine and their colors will mix
-x,x,x		x,x,x
-f,f,x	->	x,f,x	
-x,x,x		x,x,x
-Flowers will always combine into the center
-
-If two flowers are placed with one space between them, they will generate a new flower with petals chosen by the flowers position around the empty gridspace
-
-Flowers have at least 3 and max 5 petals 
-3 petals: 123	4 petals: 1234	5 petals: 12345
-x,2,x		x,3,x		2,3,4
-1,o,3		2,o,4		1,o,5
-x,x,x		x,1,x		x,x,x
-
-Flowers will always prioritize combining over generating a new flower
-
-Player wins as soon as any flower(s) on the board fits the order given
-
-Player is only given flowers is one of 5 primary colors, red, green, blue, black, white
-
-Flowers can only be colored once per primary color, if a flower gets two of the same color, it disregards all other colors. So, flower of red - white, if combined with a red flower it becomes red - white - red = red flower.
-1 exception: if black is applied to a flower with white in it, both will be removed, and vice versa
-If a flower has more than one dupe color, ex red - red - green - green, it will prioritize as red - green - blue - black - white, where the first mention will be prioritized over the last mentioned
+            <ul>
+                <li>Du må placere blomster som du vil, men blomster på brættet kan ikke flyttes</li>
+                <li>Hvis du placere en blomst diagonalt fra en anden vil de blande deres farve og en ny blandet blomst vil springe op hvor du placerede den sidste blomst.</li>
+                <li>Hvis du pladere en blomst ved siden af en anden vil den erstatte et blad på blomsten.</li>
+                <li>Hvis et blomsterblad har to gange den samme farve, vil bladet bliver overtaget af den farve.</li>
+                <li>HVis et blomsterblad har en sort farve og bliver blandet med en hvis, vil både den sorte og hvide farve forsvinde. Med undtagelse af hvis bladet KUN er sort og hvidt</li>
+                <li>Du kan blande mange blomster på en gang hvis den placerede blomst deler diagonal med andre blomster. Alle gyldige blomster vil da blandesd med den du placerede.</li>
+                <li>Du kan fordele balde på flere blomster, hvis den blomst du placerer deler sider med flere, bliver dens blade fordelt.</li>
+                <li>Du blander altid før du fordeler blade.</li>
+                <li>Du vinder når du har opfyldt alle blomster ordrerne ved at alle blomsterne er til stæde på brættet.</li>
+            </ul>
         </div>
     </div>
 </body>
