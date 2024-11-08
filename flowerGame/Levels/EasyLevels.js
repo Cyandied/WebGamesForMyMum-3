@@ -5,7 +5,7 @@ const Elevel1 = new Level(
     3,3,3,
     {
         "r":1,
-        "g":0,
+        "g":1,
         "b":0,
         "k":1,
         "w":0
@@ -15,10 +15,10 @@ const Elevel1 = new Level(
     "Well done!",
     [
         ["f,1","",""],
-        ["","","f,2"],
+        ["","",""],
         ["","",""]
     ],
-    [new Flower(3,"w"),new Flower(3,"g")]
+    [new Flower(3,"w")]
 )
 
 const Elevels = [Elevel1];
