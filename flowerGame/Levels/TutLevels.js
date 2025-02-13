@@ -136,4 +136,28 @@ const tutLevel6 = new Level(
     [new Flower("g")]
 );
 
-const TLevels = [tutLevel1,tutLevel2,tutLevel3,tutLevel4,tutLevel5,tutLevel6];
+const tutLevel7 = new Level(
+    7,7,
+    {
+        "r":99,
+        "g":99,
+        "b":99,
+        "k":99,
+        "w":99
+    },
+    [],
+    "Free play",
+    "Free play",
+    [
+        ["","","","","","",""],
+        ["","","","","","",""],
+        ["","","","","","",""],
+        ["","","","","","",""],
+        ["","","","","","",""],
+        ["","","","","","",""],
+        ["","","","","","",""]
+    ],
+    []
+);
+
+const TLevels = [tutLevel1,tutLevel2,tutLevel3,tutLevel4,tutLevel5,tutLevel6,tutLevel7];

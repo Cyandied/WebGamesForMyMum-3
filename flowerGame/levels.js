@@ -33,7 +33,7 @@ function setComplete(pack,id){
 }
 
 if(levelList){
-    localStorage.clear();
+    // localStorage.clear();
     Object.keys(levels).forEach(levelName => {
         const h1 = document.createElement("h1");
         h1.innerHTML = levelName;

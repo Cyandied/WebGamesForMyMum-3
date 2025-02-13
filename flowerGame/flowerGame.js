@@ -283,6 +283,9 @@ function animatePetal(amountR, amountT,p){
 
 function checkWin() {
     const checkOff = [...level.order];
+    if (level.order.length == 0){
+        return;
+    }
     for (let orderFlower of level.order) {
         for (let xy of Object.keys(flowersInPlay)) {
             if (orderFlower.compareSame(flowersInPlay[xy])) {

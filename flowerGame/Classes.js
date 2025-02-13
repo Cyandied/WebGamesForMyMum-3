@@ -17,7 +17,7 @@ class Level {
 }
 
 class Flower {
-    constructor(universal="", petal1="",petal2="",petal3="",petal4="",petal5=""){
+    constructor(universal="", petal1="",petal2="",petal3="",petal4=""){
         this.petalAmount = 4;
         if(petal1==""){
             this.petals = [new Petal(universal.split(",")),new Petal(universal.split(",")),new Petal(universal.split(",")),new Petal(universal.split(","))];
