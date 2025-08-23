@@ -1,0 +1,41 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regler Paint Mixer Simulator</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="pms.css">
+</head>
+
+<body>
+    <div class="menu">
+        <a href="pms.html" style="margin: 0 auto;">Paint Mixer Simulator</a>
+        <div>
+            <h1>Regler:</h1>
+            <p>I Painter Mixer Simulator er det dit job at blande det maling som du bliver bedt om. Farven skal helst passe så godt som muligt!</p>
+            <p>Til jobbet får du en malerbøtte, som kan indeholde 20 enheder af maling.</p>
+            <p>Du kan smidde maling i 1 enhed af gangen. Enten kan du smide en af de standard-farver som du er givet i, ellers kan du "sample" din malerbøtte og bruge den farve. Du kan kun have 1 sample aktiv af gange. Hvis du sampler igen vil den gamle farve blive overskrevet.</p>
+            <p>Hvis du fylder spanden helt op men du ikke er færdig med at blande, skal du smide hele bøtten ud. Du beholder din sample.</p>
+            <p>For at blande de farver du har hældt i skal du trykke på "mix" knappen. Det finder gennemsnittet af alle farver du har smidt i og viser det.</p>
+            <h2>Score</h2>
+            <p>Score er udregnet efter hvor mange enheder af maling du har blandet i alt (jo mere maling jo mindre score), hvor mange gange du har mixet (jo færre jo bedre) og hvor tæt du kom på farven.</p>
+            <p>Hver sværhedsgrad har en minimumsgrænse for hvor nøjagtig farven skal være, hvis du er under denne grænse er din score altid 0.</p>
+            <p>Hvis du slår farvekode hint til i løbet af spillet vil din endelige score altid halveres, lige meget hvor lang tid du havde det slået til.</p>
+            <h2>Sværhedsgrader</h2>
+            <p><strong>EASY: </strong>Den letteste sværhedsgrad. Du får 5 standard-farver: rød, gul, blå, sort og hvid. Minimuns nøjagtighed er 70%.</p>
+            <p><strong>MEDIUM: </strong>Den anden letteste sværhedsgrad. Du får 5 standard-farver: rød, gul, blå, sort og hvid. Minimuns nøjagtighed er 80%</p>
+            <p><strong>HARD: </strong>Den anden sværeste sværhedsgrad. Du får 5 standard-farver: cyan, magenta, gul, sort og hvid. Minimuns nøjagtighed er 85%</p>
+            <p><strong>EXPERT: </strong>Den sværeste sværhedsgrad. Du får 6 standard-farver: rød, gul, grøn, sort, hvid og gennemsigtig. Et objekt vil blive placeret bag bøtten og ønskede resultat. Minimuns nøjagtighed er 85%</p>
+            <h2>Knapper</h2>
+            <p>Runde farvede knapper svarer hver især til en standardfarve (gennemsigtig er blot en sort-ringet cirkel).</p>
+            <p>Din sample findes som en firkant.</p>
+            <p>♻️ - Ny sample knap.</p>
+            <p>🔄 - Mix farve.</p>
+            <p>🚽 - Skrot bøtte.</p>
+            <p>✔️ - Færdig.</p>
+        </div>
+    </div>
+</body>
+
+</html>

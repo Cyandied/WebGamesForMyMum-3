@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paint Mixer Simulator</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="pms.css">
+</head>
+
+<body>
+    <div id = "alert" class="hidden">
+    </div>
+    <div id="score" class="hidden">
+        <h2 id="MM"></h2>
+        <div id="end-comparison">
+            <div id="color-goal-container-end" class="color-goal-container">
+                <p>Mål farve</p>
+                <div id="color-goal-end"></div>
+                <div class="expert-picker"></div>
+            </div>
+            <div id="color-result-container-end" class="color-goal-container">
+                <p>Din farve</p>
+                <div id="color-result-end"></div>
+                <div class="expert-picker"></div>
+            </div>
+        </div>
+        <h1 id="scoreNum">SCORE</h1>
+        <h3 id="SM"></h3>
+        <select name="diff" id="diff">
+            <option value="easy">EASY</option>
+            <option value="mid">MEDIUM</option>
+            <option value="hard">HARD</option>
+            <option value="expert">EXPERT</option>
+        </select>
+        <button id="new-game">New game</button>
+    </div>
+    <div id="main-display">
+        <div id="goal-display">
+            <div id="color-goal-container" class="color-goal-container">
+                <div id="color-goal"></div>
+                <div class="expert-picker"></div>
+            </div>
+            <button id="expert-image">nyt billede</button>
+            <button id="display-hint">vis hint</button>
+            <h1 id="hint" class = "hidden"></h1>
+        </div>
+        <div id="play-display">
+            <div id="paint-bucket">
+                <div id="paint-container">
+
+                </div>
+                <div class="expert-picker"></div>
+            </div>
+        </div>
+        <div id="control-panel">
+            <div id="paint-panel">
+            </div>
+            <div id="buttons">
+                <button id="new-sample">♻️ ny sample</button>
+                <button id="mix-color">🔄 mix</button>
+                <button id="destroy">🚽 skrot</button>
+                <button id="done">✔️ færdig</button>
+            </div>
+        </div>
+    </div>
+
+    <script defer src="pms.js"></script>
+</body>
+
+</html>
