@@ -16,8 +16,8 @@ button, select, option {
 }
 
 button, select, option {
-    padding: 8px 10px;
-    font-size: 30px;
+    padding: 3px 5px;
+    font-size: 20px;
     color: black;
 }
 
@@ -40,7 +40,7 @@ button, select, option {
 }
 
 #control-panel, #goal-display {
-    height: 20%;
+    height: 30%;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -105,8 +105,8 @@ button, select, option {
 }
 
 #paint-bucket {
-    height: 500px;
-    width: 500px;
+    height: 200px;
+    width: 200px;
     background-image: url("paintBucket.JPG");
     background-size: contain;
     padding: 10px;
@@ -130,7 +130,7 @@ button, select, option {
 }
 
 #paint-container {
-    width: 500px;
+    width: 200px;
     height: 1%;
     position: absolute;
     z-index: 100;
@@ -145,6 +145,12 @@ button, select, option {
 
 .paint {
     width: 100%;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
 }
 
 #end-comparison {
